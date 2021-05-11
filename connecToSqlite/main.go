@@ -14,17 +14,13 @@ import (
 func main() {
 	database, _ := sql.Open("sqlite3", "./bogo.db")
 
-	statement, _ := database.Prepare("CREATE TABLE 'operationldata' ('period' NUMERIC UNIQUE, 'lowestP'	NUMERIC, " +
+	statement, _ := database.Prepare("CREATE TABLE 'operationaldata' ('period' NUMERIC UNIQUE, 'lowestP'	NUMERIC, " +
 		"'openingP'	NUMERIC, 	'closingP'	NUMERIC, 'highestP'	NUMERIC, 'volumesold'	NUMERIC, 'beforeclosingP'	NUMERIC, " +
 		"'volumeweightedaverageP'	NUMERIC, PRIMARY KEY(period));")
 	statement.Exec()
 
-	statement, _ = database.Prepare("INSERT INTO operationldata VALUES (?, ?, ?, ?, ?, ?, ?, ?);")
-	statement.Exec()
-	/*
-		statement, _ = database.Prepare("INSERT INTO people VALUES (?, ?);")
-		statement.Exec("Edy", "Gronki")
-	*/
+	statement, _ = database.Prepare("INSERT INTO operationaldata VALUES (?, ?, ?, ?, ?, ?, ?, ?);")
+	statement.Exec()	
 
 	resp, err := http.Get("https://bitex.la/api-v1/rest/btc_usd/market/last_24_hours")
 
@@ -62,7 +58,7 @@ func main() {
 		fmt.Println(n)
 	}
 
-	rows, _ := database.Query("SELECT * FROM operationldata;")
+	rows, _ := database.Query("SELECT * FROM operationaldata;")
 	var period int
 	var lowestP int
 	var openingP int
