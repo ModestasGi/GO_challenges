@@ -16,7 +16,7 @@ func main() {
 
 	statement, _ := database.Prepare("CREATE TABLE 'operationldata' ('period' NUMERIC UNIQUE, 'lowestP'	NUMERIC, " +
 		"'openingP'	NUMERIC, 	'closingP'	NUMERIC, 'highestP'	NUMERIC, 'volumesold'	NUMERIC, 'beforeclosingP'	NUMERIC, " +
-		"'volumeweightedaverageP'	NUMERIC, PRIMARY KEY(period) ));")
+		"'volumeweightedaverageP'	NUMERIC, PRIMARY KEY(period));")
 	statement.Exec()
 
 	statement, _ = database.Prepare("INSERT INTO operationldata VALUES (?, ?, ?, ?, ?, ?, ?, ?);")
